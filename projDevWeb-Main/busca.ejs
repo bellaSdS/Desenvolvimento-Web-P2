@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Busca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/buscastyle.css">
+</head>
+<body>
+    <header>
+        <img class="logo" href="/" src="images/logo.png" alt="logo" style="max-width: 340px;">
+        <a class="cta" href="/areacliente"><img src="images/icons8-pessoa-32.png"></a>
+    </header>
+
+    <div class = "conteúdo">
+        <div class = "filtro">
+            <div class = "filtro-busca">
+                <input class = "buscar" type = "search" name = "pesquisa" id = "pesquisa" placeholder="Pesquisar..." oninput="limpar()"/>
+                <select id ="planodesaúde" style="border:solid 1px rgb(230, 230, 230); border-radius: 10px; margin-right: 10px;">
+                    <option value="">--Plano de Saúde--</option>
+                    <option value="plano1">Bradesco</option>
+                    <option value="plano2">Amil</option>
+                    <option value="plano3">Unimed</option>
+                    <option value="plano4">NotreDame</option>
+                    <option value="plano5">Plena Saúde</option>
+                </select>
+                <label style="font-size:xx-small;">R$ 0,00</label>
+                <input type="range" id="valor" value = 5000; name="valor" min="0" max="10000.00" step="1.00" oninput="rangeValue.innerText = 'R$' + this.value">
+                <label style="font-size: xx-small;" id="rangeValue"></label>
+                <select id ="ordenar" style="border:solid 1px rgb(230, 230, 230); border-radius: 10px; margin-left: 10px;">
+                    <option value="">--Ordenar por:--</option>
+                    <option value="caro">Mais caro</option>
+                    <option value="barato">Mais barato</option>
+                    <option value="perto">Mais perto</option>
+                </select>
+                <button type="button" style="color: #25c997; border:solid 1px #25c997; background-color: transparent; height: 30px; text-align: center; padding: 5px; margin-left: 10px; width: 100px;">Buscar</button> 
+            </div>
+
+            <div class ="médicos">
+                <% medicos.forEach(medico => { %>
+                    <div class = "med" onclick = 'fechar(<%- JSON.stringify(medico) %>)' id = "<%= medico.nome %>" style="display: flex; justify-content:space-between;" return false;">
+                        <img src=<%= medico.foto %> style="clip-path: circle(39%); width: 200px;">
+                        <div id="info" style="text-align: left;">
+                            <h2><%= medico.nome %></h2>
+                            <p id = "preço">Consultas em torno de: R$ <%= medico.valor_consulta %>,00</p>
+                            <p id="especialização">Especialização: <%= medico.especialização %></p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <div class = "blur" id ="sombra" onclick = "fechar()">
+    </div>
+    <div id = "perfil" class ="perfil" style="background: #ffffff">
+        <div class = "cabeçalho">
+            <h1 id = "nomeperfil" style="text-align: left;"></h1>
+            <a href="/areamedico"><button id="Marcar">Marcar Consulta</button></a>
+        </div>
+        <img id="foto" src="https://vejasp.abril.com.br/wp-content/uploads/2016/12/medico1.jpg" style="height: 35%; clip-path: circle(39%);">
+        <div class="info">
+            <h3>Especialização</h3>
+            <div id = "esp" style="margin-top: 10px; margin-bottom: 30px;"></div>
+            <h3 style="margin-bottom: 10px;">Horários de trabalho:</h3>
+            <ul style="list-style: none; margin-bottom: 30px;">
+                <li>Segunda: 9:00 às 18:00</li>
+                <li>Terça: 9:00 às 18:00</li>
+                <li>Quarta: 9:00 às 18:00</li>
+                <li>Quinta: 9:00 às 18:00</li>
+                <li>Sexta: 9:00 às 18:00</li>
+                <li>Sábado: 9:00 às 12:00</li>
+                <li>Domingo: Sem atendimento</li>
+            </ul>
+            <div id="preçoperfil" style="margin-bottom: 30px;"></div>
+            <h3>Aceita quais planos?</h3>
+            <select id="planos" style="justify-content: center; border: none; color: #1a1d54;"></select>
+        </div>
+        <div class="contatar">
+            <a id = "email" href="mailto: name@email.com"></a>
+            <p id = "endereço"></p>
+            <p id = "telefone"></p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var open = false;
+        var perfil = document.getElementById("perfil");
+        var sombra = document.getElementById("sombra");
+
+        function fechar(medico){
+            if(medico != null){
+                document.getElementById("nomeperfil").innerHTML = medico.nome;
+                document.getElementById("preçoperfil").innerHTML = "<h3>" + "Consultas em torno de: R$" + medico.valor_consulta + ",00 </h3";
+                document.getElementById("esp").innerHTML = "<p>" + medico.especialização + "</p";
+                document.getElementById("email").href = "mailto: "+ medico.email;
+                document.getElementById("email").innerHTML = medico.email;
+                document.getElementById("endereço").innerHTML = medico.endereço;
+                document.getElementById("telefone").innerHTML = medico.telefone;
+                document.getElementById("foto").src = medico.foto;
+                    const planosDeSaudeSelect = document.getElementById('planos');
+                    planosDeSaudeSelect.innerHTML = '<option value="">Selecione um plano de saúde</option>';
+                    if (Array.isArray(medico.planos_de_saúde)) {
+                      medico.planos_de_saúde.forEach(plano => {
+                        const option = document.createElement('option');
+                        option.value = plano;
+                        option.textContent = plano;
+                        planosDeSaudeSelect.appendChild(option);
+                      });
+                    } else {
+                      console.error("planos_de_saúde não é um array:", medico.planos_de_saúde);
+                    }
+            }
+            open = !open;
+            Mover();
+        };
+    
+        function Mover(){
+            if(open){
+                perfil.style.marginRight = "450px";
+                sombra.style.marginRight = "1450px";
+                return;
+            }
+            perfil.style.marginRight = "0px";
+            sombra.style.marginRight = "-1450px";
+        }
+    </script>
+    
+    <footer class="footerHome">
+      <div class="authors">
+        <div class="author">
+          <h4>Gabriel Augusto</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/gab.png">
+          <a href="https://www.linkedin.com/in/gabriel-freitas-159b68282?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Linkedin</a>
+    
+        </div>
+        <div class="author">
+          <h4>Isabella Simone</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/isa.png">
+          <a href="https://www.linkedin.com/in/isabellasdossantos?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Linkedin</a>
+    
+        </div>
+        <div class="author">
+          <h4>Rodrigo Oliveira</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/toka.png">
+          <a href="https://www.linkedin.com/in/rodrigo-oliveira-da-silva-114047243?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Linkedin</a>
+    
+        </div>
+        <div class="author">
+          <h4>Adrielle Moreira</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/dri.jpg">
+          <a href="https://www.linkedin.com/in/adrielle-moreira-0a7492197?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Linkedin</a>
+  
+        </div>
+  
+        <div class="author">
+          <h4>Eduardo Rossetto</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/edu.jpg">
+          <a href="https://www.linkedin.com/in/eduardo-rossetto/">Linkedin</a>
+  
+        </div>
+  
+      </div>
+    </footer>
+</body>
+</html>

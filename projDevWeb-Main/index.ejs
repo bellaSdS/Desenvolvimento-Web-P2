@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body>
+  <header id ="myHeader">
+    <img class="logo" src="images/logo.png" href="/index"  alt="logo" style="max-width: 340px;">
+    <a class="cta" href="/login"><button type="button">Login</button></a>
+  </header>
+
+  <div class="outline">
+    <h1>"SAÚDE,<br>
+    EM PRIMEIRO<br>
+    LUGAR SEMPRE!"
+    </h1>
+  </div>
+
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <div class= "venda" style="font-size:x-large;">
+      <h2 style="color: white; text-align: center;">Escolha o seu plano!</h2>
+      <div style="display: flex; width: 70%; height: 90%; justify-content: center; align-items: center; margin-left: auto; margin-right: auto;">
+        <div class ="pacotes">
+          <h2 style="color: #25c997;; text-align: center; margin-bottom: 10px;">Paciente</h2>
+          <div style="width: 250px; justify-content: center; align-items: center; margin-left: auto; margin-right: auto;">
+            <img src="https://vivamais.cemigsaude.org.br/wp-content/uploads/2020/07/cemigsaude_cemigsaude_image_996-scaled.jpeg" style="width: 100%; margin-bottom: 20px">
+          </div>
+          <p style="margin: 30px; color: white">Aqui, você paciente, terá acesso a teleconsultas, 
+          agendamentos para consultas presenciais e médicos das mais variadas especialidades, 
+          para uma saúde de melhor qualidade, pensado em prol da sua saúde.
+          </p>
+        </div>
+
+        <div style="background-color: white; width: 2px;"></div>
+
+        <div class ="pacotes">
+          <h2 style="color: #25c997;; text-align: center; margin-bottom: 10px;">Médico</h2>
+          <div style="width: 250px; justify-content: center; align-items: center; margin-left: auto; margin-right: auto;">
+            <img src="https://blog.ipog.edu.br/wp-content/uploads/2017/10/m%C3%A9dico.jpg" style="width: 100%; margin-bottom: 20px">
+          </div>
+          <p style="margin: 30px; color: white;">Um lugar onde terá fácil acesso aos seus orçamentos, agendamentos e consultar. 
+          Tudo para uma melhor administração de seus pacientes e uma facilidade e otimização do seu trabalho.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="slideshow-container">
+
+    <button class="prev" onclick="scrollPrev()">❮</button>
+
+    <div class="carousel" onwheel="scrollWithMouse(event)">
+      <% medicos.forEach(medico => { %>
+        <div class="slide">
+          <div id = "perfil" class ="perfil" style="background: #ffffff">
+            <div style="padding: 0px; width: 200px;">
+    
+              <div class = "cabeçalho">
+                <h5 id = "nomeperfil"><%= medico.nome %></h5>
+              </div>
+              <div style="width: 100%;">
+                <img src=<%= medico.foto %> style="clip-path: circle(39%);">
+              </div>
+              <div class="info">
+                  <h5>Especialização</h5>
+                  <div id = "especialização" style="margin-top: 5px; margin-bottom: 10px; font-size: small;"><%= medico.especialização %></div>
+              </div>
+    
+              <div style="height: 100px;">
+                <h3 style="margin-bottom: 5px;">Avaliação</h3>
+                <p id ="avaliação" style="margin-right: 10px; font-family: Arial, Helvetica, sans-serif; color: #1a1d54;"><b><%= medico.avaliação %> Estrelas</b></p>
+                <div class="rating" style="width:150px">
+                  <% for (let i = 0; i < medico.avaliação; i++) { %>
+                    <label for="star"></label>
+                  <% } %>
+                </div>
+              </div>
+            </div>
+    
+            <div style="align-items: center; display: grid;">
+              <p id="qualification" style="font-size: xx-small; text-justify: inter-word; text-align: justify; align-items: center; margin-left: auto; margin-right: auto;"><%= medico.detalhe %></p>
+            </div>
+          </div> 
+        </div>
+      <% }) %>
+
+    <button class="next" onclick="scrollNext()">❯</button>
+  </div>
+
+  <script type="text/javascript">
+    function scrollWithMouse(event) {
+      const delta = Math.sign(event.deltaX); // Determina a direção da rolagem horizontal
+      const carousel = document.querySelector('.carousel');
+      carousel.scrollLeft -= delta * 50; // Ajuste o valor conforme necessário para a quantidade desejada de rolagem
+    }
+
+    function scrollNext() {
+      const carousel = document.querySelector('.carousel');
+      carousel.scrollBy({
+        left: 300, // Ajuste o valor conforme necessário para a quantidade desejada de rolagem
+        behavior: 'smooth' // Torna a rolagem suave (smooth)
+      });
+    }
+
+    function scrollPrev() {
+      const carousel = document.querySelector('.carousel');
+      carousel.scrollBy({
+        left: -300, // Ajuste o valor conforme necessário para a quantidade desejada de rolagem
+        behavior: 'smooth' // Torna a rolagem suave (smooth)
+      });
+    }
+  </script>
+
+  <footer class="footerHome">
+      <div class="authors">
+        <div class="author">
+          <h4>Gabriel Augusto</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/gab.png">
+          <a href="https://www.linkedin.com/in/gabriel-freitas-159b68282?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Linkedin</a>
+    
+        </div>
+        <div class="author">
+          <h4>Isabella Simone</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/isa.png">
+          <a href="https://www.linkedin.com/in/isabellasdossantos?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">Linkedin</a>
+    
+        </div>
+        <div class="author">
+          <h4>Rodrigo Oliveira</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/toka.png">
+          <a href="https://www.linkedin.com/in/rodrigo-oliveira-da-silva-114047243?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Linkedin</a>
+    
+        </div>
+        <div class="author">
+          <h4>Adrielle Moreira</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/dri.jpg">
+          <a href="https://www.linkedin.com/in/adrielle-moreira-0a7492197?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Linkedin</a>
+  
+        </div>
+  
+        <div class="author">
+          <h4>Eduardo Rossetto</h4>
+          <img class="pfp" style="max-height: 100px;" src="images/edu.jpg">
+          <a href="https://www.linkedin.com/in/eduardo-rossetto/">Linkedin</a>
+  
+        </div>
+  
+      </div>
+  </footer>
+</body>
+
+</html>

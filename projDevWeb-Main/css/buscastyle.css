@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+.conteúdo{
+    display: flex;
+    height:fit-content;
+}
+.buscar{
+    background-color: #e6e5e5;
+    border-radius: 10px;
+    width: 430px;
+    padding-left: 7px;
+    border: none;
+    margin-right: 10px;
+}
+header {
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 100px;
+    padding-bottom: 10px;
+    background-color: #1a1d54;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.nav_links {
+    list-style: none;
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover {
+    color: #0088a9
+}
+
+button{
+    padding: 9px 25px;
+    background-color: #25c997;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+body{
+    background-color: #ffffff;
+}
+.filtro{
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+}
+.filtro-busca{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.médicos{
+    height: 100%;
+    margin-top: 40px;
+    padding: 30px;
+    padding-left: 50px;
+    text-align: center;
+    justify-content: center;
+    background: #faf9f9;
+    border: #e6e5e5 solid;
+    border-radius: 20px;
+}
+.med{
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.med:hover{
+    background-color: #e6e5e5;
+}
+.perfil{
+    position: fixed;
+    text-align: center;
+    top: 0px;
+    right: -450px;
+    background: #25c997;
+    width: 450px;
+    height: 100%;
+    border-radius: 30px;
+    padding: 30px; 
+    color: #1a1d54;
+}
+
+div::-webkit-scrollbar {
+  width: 12px;
+  background-color:#eeeeee;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #25c997;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+
+.cabeçalho{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    height: 20px;
+    margin-top: 10px;
+}
+.info{
+    margin-top: 10px;
+    height: 40%;
+    overflow-y: scroll;
+    border-radius: 10px;
+    text-align: left;
+    padding: 10px;
+}
+.contatar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    font-size:x-small;
+}
+.blur{
+    position: fixed;
+    top: 0px;
+    right: -1450px;
+    background: rgb(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+
+}
+    
+.footerReg{
+    width: 100%;
+    height: 50px;
+}
+
+.footerLog{
+    width: 100%;
+    height: 50px;
+}
+
+.footerHome{
+    width: 100%;
+    height: 50px;
+}
+
+.authors{
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    background-color: #1a1d54;
+}
+
+.author{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.pfp{
+    border: 5px;
+    border-radius: 10px;
+    border-color: #25c997;
+    border-style: solid;
+}
+
+.footerHome a{
+    text-decoration: none;
+    color: #f7f7f7;
+    font-style: italic;
+    
+}
+.div a{
+    text-decoration: none;
+    color: #1a1d54;
+    font-style: italic;
+}
+a:hover{
+    color: #25c997;
+    text-decoration: underline;
+    transition: all 0.3s ease 0s;
+}
+
+h4{
+    color: #25c997;
+}
